@@ -67,17 +67,12 @@ class ViewController: UIViewController {
             }
         }
 
-        guard enVoices.count > 4, jaVoices.count > 2 else {
-            print("\nThis demo need to run on real device with more than 2 ja voices and 4 en voices.\n")
+        guard jaVoices.count > 2 else {
+            print("\nThis demo need to run on real device with more than 2 ja voices.\n")
             return
         }
 
         let lines: [(text: String, voice: AVSpeechSynthesisVoice)] = [
-            (text: "pizza", voice: enVoices[0]),
-            (text: "pizza", voice: enVoices[1]),
-            (text: "pizza", voice: enVoices[2]),
-            (text: "pizza", voice: enVoices[3]),
-            (text: "pizza", voice: enVoices[0]),
             (text: "pizza", voice: enVoices[0]),
             (text: "鮭", voice: jaVoices[0]),
             (text: "肉", voice: jaVoices[1]),
