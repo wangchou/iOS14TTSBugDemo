@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,10 +13,6 @@
 		BE0A6BCD257DBC6B0085ECA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE0A6BCB257DBC6B0085ECA2 /* Main.storyboard */; };
 		BE0A6BCF257DBC6C0085ECA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE0A6BCE257DBC6C0085ECA2 /* Assets.xcassets */; };
 		BE0A6BD2257DBC6C0085ECA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE0A6BD0257DBC6C0085ECA2 /* LaunchScreen.storyboard */; };
-		BE0A6BDC257DBD790085ECA2 /* PromisesTestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = BE0A6BDB257DBD790085ECA2 /* PromisesTestHelpers */; };
-		BE0A6BDE257DBD790085ECA2 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = BE0A6BDD257DBD790085ECA2 /* Promises */; };
-		BE0A6BE0257DBD790085ECA2 /* FBLPromises in Frameworks */ = {isa = PBXBuildFile; productRef = BE0A6BDF257DBD790085ECA2 /* FBLPromises */; };
-		BE0A6BE2257DBD790085ECA2 /* FBLPromisesTestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = BE0A6BE1257DBD790085ECA2 /* FBLPromisesTestHelpers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +32,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0A6BE0257DBD790085ECA2 /* FBLPromises in Frameworks */,
-				BE0A6BDE257DBD790085ECA2 /* Promises in Frameworks */,
-				BE0A6BDC257DBD790085ECA2 /* PromisesTestHelpers in Frameworks */,
-				BE0A6BE2257DBD790085ECA2 /* FBLPromisesTestHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +86,6 @@
 			);
 			name = iOS14TTSBugDemo;
 			packageProductDependencies = (
-				BE0A6BDB257DBD790085ECA2 /* PromisesTestHelpers */,
-				BE0A6BDD257DBD790085ECA2 /* Promises */,
-				BE0A6BDF257DBD790085ECA2 /* FBLPromises */,
-				BE0A6BE1257DBD790085ECA2 /* FBLPromisesTestHelpers */,
 			);
 			productName = iOS14TTSBugDemo;
 			productReference = BE0A6BC2257DBC6B0085ECA2 /* iOS14TTSBugDemo.app */;
@@ -127,7 +115,6 @@
 			);
 			mainGroup = BE0A6BB9257DBC6B0085ECA2;
 			packageReferences = (
-				BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */,
 			);
 			productRefGroup = BE0A6BC3257DBC6B0085ECA2 /* Products */;
 			projectDirPath = "";
@@ -364,40 +351,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/promises";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.11;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		BE0A6BDB257DBD790085ECA2 /* PromisesTestHelpers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = PromisesTestHelpers;
-		};
-		BE0A6BDD257DBD790085ECA2 /* Promises */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = Promises;
-		};
-		BE0A6BDF257DBD790085ECA2 /* FBLPromises */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = FBLPromises;
-		};
-		BE0A6BE1257DBD790085ECA2 /* FBLPromisesTestHelpers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BE0A6BDA257DBD790085ECA2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = FBLPromisesTestHelpers;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BE0A6BBA257DBC6B0085ECA2 /* Project object */;
 }

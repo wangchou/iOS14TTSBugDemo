@@ -7,7 +7,6 @@
 
 import UIKit
 import Speech
-import Promises // Google/Promises for waiting speak finish
 
 class ViewController: UIViewController {
     @IBOutlet weak var textview: UITextView!
@@ -42,20 +41,6 @@ class ViewController: UIViewController {
     func speakAll() {
         let ttss = [TTS(), TTS(), TTS()]
 
-        var lineIndex = 0
-        func sayNextLine() -> Promise<Void> {
-            guard lineIndex < lines.count else {
-                let promise = Promise<Void>.pending()
-                promise.fulfill(())
-                return promise
-            }
-            let line = lines[lineIndex]
-            let tts = ttss[lineIndex % ttss.count]
-            lineIndex += 1
-            textview.text = "Speaking: \n\(line.text)\n by \(line.voice.identifier)"
-            return tts.say(line)
-        }
-
         var enVoices: [AVSpeechSynthesisVoice] = []
         var jaVoices: [AVSpeechSynthesisVoice] = []
         for voice in AVSpeechSynthesisVoice.speechVoices() {
@@ -76,7 +61,7 @@ class ViewController: UIViewController {
             (text: "pizza", voice: enVoices[0]),
             (text: "鮭", voice: jaVoices[0]),
             (text: "肉", voice: jaVoices[1]),
-            (text: "ice cream", voice: enVoices[0]),
+            (text: "pizza", voice: enVoices[0]),
             (text: "鮭", voice: jaVoices[0]),
             (text: "肉", voice: jaVoices[1]),
             (text: "ice cream", voice: enVoices[0]),
@@ -88,52 +73,35 @@ class ViewController: UIViewController {
             (text: "ice cream", voice: enVoices[0]),
         ]
 
-        let startTime = NSDate().timeIntervalSince1970
-        sayNextLine()
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .then(sayNextLine)
-            .always {
-                print(String(format: "finished time: %.3f", NSDate().timeIntervalSince1970 - startTime))
-            }
+        var lineIndex = 0
+        func sayNextLine() {
+            guard lineIndex < lines.count else { return }
+            let line = lines[lineIndex]
+            let tts = ttss[lineIndex % ttss.count]
+            lineIndex += 1
+            textview.text = "Speaking: \n\(line.text)\n by \(line.voice.identifier)"
+            tts.say(line)
+        }
+
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+            sayNextLine()
+        }
     }
 }
 
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer = AVSpeechSynthesizer()
-    var promise = Promise<Void>.pending()
 
-    func say(_ line: (text: String, voice: AVSpeechSynthesisVoice)) -> Promise<Void> {
-        promise = Promise<Void>.pending()
+    func say(_ line: (text: String, voice: AVSpeechSynthesisVoice)) {
         let utterance = AVSpeechUtterance(string: line.text)
         utterance.voice = line.voice
         synthesizer.delegate = self
         synthesizer.speak(utterance)
-        return promise
-    }
-
-    func speechSynthesizer(_: AVSpeechSynthesizer,
-                           didFinish utterance: AVSpeechUtterance) {
-        promise.fulfill(())
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         // do nothing...
         // but with this method will trigger en tts speak wrong text
-        // and delay speaking for 2 secs (en_voice1 -> ja_voice1 -> ja_voice2) ^ n times
+        // and delay speaking for 2 secs (en_voice1 -> ja_voice1 -> ja_voice2) ^ n order
     }
 }
